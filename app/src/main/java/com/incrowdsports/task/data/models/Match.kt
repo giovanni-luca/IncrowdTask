@@ -1,8 +1,6 @@
 package com.incrowdsports.task.data.models
 
-import androidx.annotation.Keep
 
-@Keep
 data class Match(
     val id: String,
     val competition: String,

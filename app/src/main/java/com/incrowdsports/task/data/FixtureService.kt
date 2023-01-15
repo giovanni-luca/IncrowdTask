@@ -16,6 +16,7 @@ interface FixtureService {
         @Query("size") size: Int,
     ): NetworkResponse<List<Fixture>>
 
+    //TODO it is not working, there are an error with the model I couldn't fix in time :(
     @GET("matches/{id}")
     suspend fun getPlayerList(
         @Path("id") matchId: String

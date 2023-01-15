@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.incrowdsports.task.data.models.Player
 import com.incrowdsports.task.databinding.PlayerLayoutBinding
-
+//TODO migrate this list and this screen to Compose
 class MatchDetailsAdapter : ListAdapter<MatchDetailsAdapter.PlayerItem, RecyclerView.ViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -20,6 +20,7 @@ class MatchDetailsAdapter : ListAdapter<MatchDetailsAdapter.PlayerItem, Recycler
 
     private class MatchViewHolder(private val binding: PlayerLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        //TODO finish the whole screen
         fun bind(item: PlayerItem) {
             binding.name.text = item.player.firstName
             binding.lastName.text = item.player.lastName

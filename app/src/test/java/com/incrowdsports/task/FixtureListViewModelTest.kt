@@ -18,7 +18,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-
+//TODO refactor tests and add more
 @ExperimentalCoroutinesApi
 class FixtureListViewModelTest {
 

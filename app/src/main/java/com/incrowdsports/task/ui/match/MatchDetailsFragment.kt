@@ -27,6 +27,7 @@ class MatchDetailsFragment : Fragment(R.layout.players_list_fragment) {
 
         viewModel.loadData()
 
+        //TODO add loading, handling errors
         viewModel.playerList
             .flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { renderPlayerList(playerList = it, adapter = adapter) }

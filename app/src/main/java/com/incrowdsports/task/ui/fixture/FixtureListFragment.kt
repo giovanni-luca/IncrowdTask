@@ -47,6 +47,7 @@ class FixtureListFragment : Fragment(R.layout.fixture_list_fragment) {
             FixtureListAdapter.FixtureItem(
                 fixture = it,
                 onClick = {
+                    //TODO temporary, change to Navigation and send data between fragments
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, MatchDetailsFragment.newInstance())
                         .addToBackStack("FixtureFragment")
