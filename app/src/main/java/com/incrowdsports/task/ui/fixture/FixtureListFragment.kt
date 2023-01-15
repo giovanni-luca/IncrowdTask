@@ -2,44 +2,23 @@ package com.incrowdsports.task.ui.fixture
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.incrowdsports.task.R
-import com.incrowdsports.task.data.FixtureService
 import com.incrowdsports.task.data.models.Fixture
 import com.incrowdsports.task.databinding.FixtureListFragmentBinding
+import com.incrowdsports.task.ui.match.MatchDetailsFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import okhttp3.HttpUrl
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
+@AndroidEntryPoint
 class FixtureListFragment : Fragment(R.layout.fixture_list_fragment) {
 
     private val binding by lazy { FixtureListFragmentBinding.bind(requireView()) }
-    private val viewModel: FixtureListViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val service: FixtureService = run {
-                    val client = OkHttpClient.Builder().build()
-                    val retrofit = Retrofit.Builder()
-                        .client(client)
-                        .baseUrl(HttpUrl.get("https://feeds.incrowdsports.com/provider/opta/football/v1/"))
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build()
-                    retrofit.create(FixtureService::class.java)
-                }
-                return FixtureListViewModel(service = service) as T
-            }
-        }
-    }
+    private val viewModel: FixtureListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +47,10 @@ class FixtureListFragment : Fragment(R.layout.fixture_list_fragment) {
             FixtureListAdapter.FixtureItem(
                 fixture = it,
                 onClick = {
-                    Toast.makeText(context, "TODO: Navigate to ${it.feedMatchId}", LENGTH_SHORT).show()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, MatchDetailsFragment.newInstance())
+                        .addToBackStack("FixtureFragment")
+                        .commit()
                 },
             )
         }
